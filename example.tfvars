@@ -1,0 +1,10 @@
+prefix                = "ez-multizone"
+region                = "us-south"
+resource_group        = "asset-development"
+tags                  = ["ez-vpc", "multitier-vpc"]
+tier_names            = ["management", "development", "production"]
+use_public_gateways   = ["production"]
+allow_inbound_traffic = []
+add_cluster_rules     = ["production", "workload"]
+classic_access        = false
+override_json         = "{}"
