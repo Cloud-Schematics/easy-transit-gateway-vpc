@@ -66,6 +66,7 @@ locals {
     vpcs = [
       for network in var.vpc_names :
       {
+        name   = "${var.prefix}-${network}"
         prefix = network
         subnets = {
           zone-1 = [
@@ -94,15 +95,32 @@ locals {
           ]
         }
         use_public_gateways = {
-          zone-1 = length(var.use_public_gateways) > 0 ? true : false
-          zone-2 = length(var.use_public_gateways) > 0 ? true : false
-          zone-3 = length(var.use_public_gateways) > 0 ? true : false
+          zone-1 = contains(var.use_public_gateways, network) ? true : false
+          zone-2 = contains(var.use_public_gateways, network) ? true : false
+          zone-3 = contains(var.use_public_gateways, network) ? true : false
         }
         security_group_rules = [
           {
             name      = "allow-all-inbound"
             direction = "inbound"
             remote    = "0.0.0.0/0"
+          }
+        ]
+        network_acls = [
+          {
+            name              = "${network}-acl"
+            add_cluster_rules = contains(var.add_cluster_rules, network)
+            rules = network == "management" ? distinct(
+              flatten([
+                for allow_rules in var.vpc_names :
+                module.dynamic_acl_allow_rules[allow_rules].rules
+              ])
+              ) : distinct(
+              flatten([
+                for allow_rules in var.vpc_names :
+                module.dynamic_acl_allow_rules[allow_rules].rules if allow_rules == network || allow_rules == "management"
+              ])
+            )
           }
         ]
       }
@@ -125,35 +143,30 @@ locals {
     }
     ##############################################################################
   }
+  
+  ##############################################################################
 
   ##############################################################################
-  # Create ACLS
+  # Environment Variables
   ##############################################################################
-  acls = [
-    for network in var.vpc_names :
-    {
-      name = "${network}-acl"
-      rules = network == "management" ? distinct(
-        flatten([
-          for allow_rules in var.vpc_names :
-          module.dynamic_acl_allow_rules[allow_rules].rules
-        ])
-        ) : distinct(
-        flatten([
-          for allow_rules in var.vpc_names :
-          module.dynamic_acl_allow_rules[allow_rules].rules if allow_rules == network || allow_rules == "management"
-        ])
-      )
-      add_cluster_rules = contains(var.add_cluster_rules, network)
-    }
-  ]
 
-  acl_map = {
-    for network_acl in local.acls :
-    (network_acl.name) => [network_acl]
+  env = {
+    vpcs = lookup(local.override, "vpcs", local.config.vpcs)
   }
 
   ##############################################################################
+
+  string = "\"${jsonencode(local.env)}\""
+}
+
+##############################################################################
+
+##############################################################################
+# Convert Environment to escaped readable string
+##############################################################################
+
+data "external" "format_output" {
+  program = ["python3", "${path.module}/scripts/output.py", local.string]
 }
 
 ##############################################################################

@@ -1,0 +1,384 @@
+{
+  "vpcs": [
+      {
+          "name": "ez-vpc-management",
+          "network_acls": [
+              {
+                  "add_cluster_rules": false,
+                  "name": "management-acl",
+                  "rules": [
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-1",
+                          "source": "10.10.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.10.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-1",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-2",
+                          "source": "10.20.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.20.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-2",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-3",
+                          "source": "10.30.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.30.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-3",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-1",
+                          "source": "10.40.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.40.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-1",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-allow-all",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-allow-all",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-2",
+                          "source": "10.50.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.50.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-2",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-3",
+                          "source": "10.60.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.60.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-3",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      }
+                  ]
+              }
+          ],
+          "prefix": "management",
+          "security_group_rules": [
+              {
+                  "direction": "inbound",
+                  "name": "allow-all-inbound",
+                  "remote": "0.0.0.0/0"
+              }
+          ],
+          "subnets": {
+              "zone-1": [
+                  {
+                      "acl_name": "management-acl",
+                      "cidr": "10.10.10.0/24",
+                      "name": "management-zone-1",
+                      "public_gateway": false
+                  }
+              ],
+              "zone-2": [
+                  {
+                      "acl_name": "management-acl",
+                      "cidr": "10.20.10.0/24",
+                      "name": "management-zone-2",
+                      "public_gateway": false
+                  }
+              ],
+              "zone-3": [
+                  {
+                      "acl_name": "management-acl",
+                      "cidr": "10.30.10.0/24",
+                      "name": "management-zone-3",
+                      "public_gateway": false
+                  }
+              ]
+          },
+          "use_public_gateways": {
+              "zone-1": false,
+              "zone-2": false,
+              "zone-3": false
+          }
+      },
+      {
+          "name": "ez-vpc-workload",
+          "network_acls": [
+              {
+                  "add_cluster_rules": false,
+                  "name": "workload-acl",
+                  "rules": [
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-1",
+                          "source": "10.10.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.10.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-1",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-2",
+                          "source": "10.20.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.20.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-2",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-management-zone-3",
+                          "source": "10.30.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.30.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-management-zone-3",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-1",
+                          "source": "10.40.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.40.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-1",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-allow-all",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-allow-all",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-2",
+                          "source": "10.50.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.50.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-2",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "0.0.0.0/0",
+                          "direction": "inbound",
+                          "icmp": null,
+                          "name": "allow-inbound-ez-vpc-workload-zone-3",
+                          "source": "10.60.10.0/24",
+                          "tcp": null,
+                          "udp": null
+                      },
+                      {
+                          "action": "allow",
+                          "destination": "10.60.10.0/24",
+                          "direction": "outbound",
+                          "icmp": null,
+                          "name": "allow-outbound-ez-vpc-workload-zone-3",
+                          "source": "0.0.0.0/0",
+                          "tcp": null,
+                          "udp": null
+                      }
+                  ]
+              }
+          ],
+          "prefix": "workload",
+          "security_group_rules": [
+              {
+                  "direction": "inbound",
+                  "name": "allow-all-inbound",
+                  "remote": "0.0.0.0/0"
+              }
+          ],
+          "subnets": {
+              "zone-1": [
+                  {
+                      "acl_name": "workload-acl",
+                      "cidr": "10.40.10.0/24",
+                      "name": "workload-zone-1",
+                      "public_gateway": true
+                  }
+              ],
+              "zone-2": [
+                  {
+                      "acl_name": "workload-acl",
+                      "cidr": "10.50.10.0/24",
+                      "name": "workload-zone-2",
+                      "public_gateway": true
+                  }
+              ],
+              "zone-3": [
+                  {
+                      "acl_name": "workload-acl",
+                      "cidr": "10.60.10.0/24",
+                      "name": "workload-zone-3",
+                      "public_gateway": true
+                  }
+              ]
+          },
+          "use_public_gateways": {
+              "zone-1": true,
+              "zone-2": true,
+              "zone-3": true
+          }
+      }
+  ]
+}

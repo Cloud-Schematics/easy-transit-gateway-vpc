@@ -99,15 +99,10 @@ variable "classic_access" {
   default     = false
 }
 
-variable "override_json" {
-  description = "Override any values with JSON to create a completely custom network. All quotation marks must be correctly escaped."
-  type        = string
-  default     = "{}"
-
-  validation {
-    error_message = "Override JSON must be able to be parsed by Terraform."
-    condition     = can(jsondecode(var.override_json))
-  }
+variable "override" {
+  description = "Override default values with custom JSON template. This uses the file `override.json` to allow users to create a fully customized environment."
+  type        = bool
+  default     = false
 }
 
 ##############################################################################

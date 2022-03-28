@@ -25,7 +25,7 @@ module "ez_vpc" {
   add_cluster_rules     = var.add_cluster_rules
   allow_inbound_traffic = var.allow_inbound_traffic
   classic_access        = var.classic_access
-  override_json         = var.override_json
+  override_json         = var.override ? file("${path.module}/override.json") : "{}"
 }
 
 ##############################################################################

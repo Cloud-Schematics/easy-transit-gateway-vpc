@@ -16,7 +16,7 @@ data "ibm_resource_group" "resource_group" {
 module "vpc" {
   source = "./vpc"
   for_each = {
-    for network in lookup(local.override, "vpcs", local.config.vpcs) :
+    for network in local.env.vpcs :
     (network.prefix) => network
   }
   resource_group_id           = data.ibm_resource_group.resource_group.id
@@ -24,7 +24,7 @@ module "vpc" {
   tags                        = var.tags
   prefix                      = lookup(each.value, "prefix", each.value.prefix)
   vpc_name                    = lookup(each.value, "vpc_name", "${var.prefix}-${each.value.prefix}")
-  network_acls                = lookup(local.override, "vpcs", null) == null ? local.acl_map["${each.value.prefix}-acl"] : each.value.network_acls
+  network_acls                = each.value.network_acls
   use_public_gateways         = lookup(each.value, "use_public_gateways", each.value.use_public_gateways)
   subnets                     = lookup(each.value, "subnets", each.value.subnets)
   use_manual_address_prefixes = lookup(each.value, "use_manual_address_prefixes", null)
